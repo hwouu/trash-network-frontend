@@ -1,46 +1,116 @@
-# Getting Started with Create React App
+# Trash Network Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+한국항공대학교 캠퍼스 내 실시간 쓰레기통 모니터링 및 관리 시스템의 웹 애플리케이션입니다.
 
-## Available Scripts
+## 프로젝트 개요
 
-In the project directory, you can run:
+ESP32와 AWS IoT를 활용하여 캠퍼스 내 쓰레기통의 상태를 실시간으로 모니터링하고 관리하는 시스템입니다. 각 쓰레기통의 용량과 화재 감지 상태를 실시간으로 확인할 수 있으며, 데이터 분석을 통한 효율적인 수거 일정 관리를 지원합니다.
 
-### `npm start`
+### 주요 기능
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **실시간 모니터링**
+  - 쓰레기통 용량 실시간 확인
+  - 화재 감지 상태 모니터링
+  - 배터리 잔량 확인
+  - 실시간 상태 업데이트
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **데이터 분석**
+  - 용량 변화 추이 분석
+  - 위치별 사용량 통계
+  - 수거 패턴 분석
 
-### `npm test`
+- **관리 기능**
+  - 쓰레기통 정보 관리
+  - 수거 일정 관리
+  - 알림 설정
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 기술 스택
 
-### `npm run build`
+- **Frontend Framework**
+  - React
+  - TypeScript
+  - Tailwind CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **상태 관리**
+  - Zustand
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **UI 컴포넌트**
+  - shadcn/ui
+  - lucide-react (아이콘)
+  - react-router-dom (라우팅)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **API 통신**
+  - Axios
+  - AWS API Gateway 연동
 
-### `npm run eject`
+## 시작하기
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 필수 조건
+- Node.js 18.0.0 이상
+- npm 9.0.0 이상
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 설치
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+# 저장소 클론
+git clone https://github.com/hwouu/trash-network-frontend.git
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# 디렉토리 이동
+cd trash-network-frontend
 
-## Learn More
+# 의존성 설치
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 개발 서버 실행
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 환경 변수 설정
+
+프로젝트 루트에 `.env` 파일을 생성하고 다음 환경 변수를 설정하세요:
+
+```env
+REACT_APP_API_URL=https://your-api-gateway-url.amazonaws.com/prod
+```
+
+## 프로젝트 구조
+
+```
+src/
+├── components/      # 재사용 가능한 컴포넌트
+├── hooks/          # 커스텀 훅
+├── pages/          # 페이지 컴포넌트
+├── services/       # API 서비스
+├── store/          # 상태 관리
+├── types/          # TypeScript 타입 정의
+└── utils/          # 유틸리티 함수
+```
+
+## 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 팀 소개
+
+- **Frontend**
+  - 노현우 ([@hwouu](https://github.com/hwouu))
+
+- **Backend & Cloud**
+  - 김강연
+  - 표형민
+
+- **Hardware & IoT**
+  - 송준수
+
+## 라이선스
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 관련 저장소
+
+- [Backend Repository](https://github.com/hwouu/trash-network-backend)
+- [Hardware Repository](https://github.com/hwouu/trash-network-hardware)
