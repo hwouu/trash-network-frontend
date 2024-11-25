@@ -1,4 +1,3 @@
-// src/components/dashboard/TrashBinList.tsx
 import React, { useState, useMemo } from 'react';
 import { TrashBinCard } from './TrashBinCard';
 import { Search, SortAsc, Filter } from 'lucide-react';
@@ -40,14 +39,14 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
   return (
     <div className="space-y-6">
       {/* Controls Section */}
-      <div className="flex flex-wrap gap-4 items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+      <div className="flex flex-wrap gap-4 items-center justify-between bg-white dark:bg-dark-card p-4 rounded-lg shadow-sm border dark:border-gray-700">
         {/* Search */}
         <div className="relative flex-grow max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
           <input
             type="text"
             placeholder="Search by location or ID..."
-            className="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-dark-card text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -58,11 +57,11 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
           {/* Sort Dropdown */}
           <div className="relative">
             <div className="flex items-center">
-              <SortAsc className="w-5 h-5 text-gray-500 mr-2" />
+              <SortAsc className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="appearance-none bg-white border rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="appearance-none bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="capacity">Capacity</option>
                 <option value="location">Location</option>
@@ -74,11 +73,11 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
           {/* Status Filter */}
           <div className="relative">
             <div className="flex items-center">
-              <Filter className="w-5 h-5 text-gray-500 mr-2" />
+              <Filter className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="appearance-none bg-white border rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="appearance-none bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="all">All Status</option>
                 <option value="normal">Normal</option>
@@ -91,21 +90,6 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
         </div>
       </div>
 
-      {/* Stats Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {[
-          { label: 'Total Bins', value: bins.length },
-          { label: 'Warning', value: bins.filter(bin => bin.status === 'warning').length },
-          { label: 'Full', value: bins.filter(bin => bin.status === 'full').length },
-          { label: 'Average Capacity', value: `${Math.round(bins.reduce((acc, bin) => acc + bin.capacity, 0) / bins.length)}%` }
-        ].map((stat, index) => (
-          <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
-            <div className="text-sm text-gray-500">{stat.label}</div>
-            <div className="text-2xl font-semibold mt-1">{stat.value}</div>
-          </div>
-        ))}
-      </div>
-
       {/* Grid of Trash Bin Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredAndSortedBins.length > 0 ? (
@@ -113,8 +97,8 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
             <TrashBinCard key={bin.deviceId} bin={bin} />
           ))
         ) : (
-          <div className="col-span-full text-center py-8 bg-white rounded-lg">
-            <p className="text-gray-500">No trash bins found matching your criteria.</p>
+          <div className="col-span-full text-center py-8 bg-white dark:bg-dark-card rounded-lg border dark:border-gray-700">
+            <p className="text-gray-500 dark:text-gray-400">No trash bins found matching your criteria.</p>
           </div>
         )}
       </div>
