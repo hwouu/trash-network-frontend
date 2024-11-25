@@ -1,4 +1,4 @@
-# KAU Trash Network (Frontend)
+# KAU Trash Network - Frontend
 
 한국항공대학교 캠퍼스 내 실시간 쓰레기통 모니터링 및 관리 시스템의 웹 애플리케이션입니다.
 
