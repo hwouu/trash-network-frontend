@@ -1,25 +1,28 @@
+// src/App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { DashboardLayout } from './components/layout/DashboardLayout';
+import { Dashboard } from './pages/Dashboard';
+import { Statistics } from './pages/Statistics';
+import { Settings } from './pages/Settings';
+import { BinManagement } from './pages/admin/BinManagement';
+import { Schedule } from './pages/admin/Schedule';
+import { NotFound } from './pages/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <DashboardLayout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/statistics" element={<Statistics />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/admin/bins" element={<BinManagement />} />
+          <Route path="/admin/schedule" element={<Schedule />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </DashboardLayout>
+    </Router>
   );
 }
 
