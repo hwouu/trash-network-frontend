@@ -1,3 +1,4 @@
+// src/pages/Dashboard.tsx
 import React from 'react';
 import { TrashBinList } from '../components/dashboard/TrashBinList';
 import { useTrashBinData } from '../hooks/useTrashBinData';
@@ -9,19 +10,26 @@ export const Dashboard = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          Dashboard
-        </h1>
-        <div className="flex items-center gap-4">
-          <button
-            onClick={refetch}
-            className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-md transition-colors"
-          >
-            새로고침
-          </button>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            Last updated: {lastUpdated.toLocaleTimeString()}
+      <div>
+        <div className="flex justify-between items-center">
+          <div className="space-y-2">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+              Dashboard
+            </h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              실시간으로 캠퍼스 내 쓰레기통의 상태를 모니터링하고 관리할 수 있습니다.
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={refetch}
+              className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-md transition-colors"
+            >
+              새로고침
+            </button>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Last updated: {lastUpdated.toLocaleTimeString()}
+            </div>
           </div>
         </div>
       </div>
