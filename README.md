@@ -1,4 +1,4 @@
-# Trash Network Frontend
+# KAU Trash Network (Frontend)
 
 한국항공대학교 캠퍼스 내 실시간 쓰레기통 모니터링 및 관리 시스템의 웹 애플리케이션입니다.
 
@@ -96,15 +96,15 @@ src/
 
 ## 팀 소개
 
-- **Frontend**
+- **Frontend & Cloud**
   - 노현우 ([@hwouu](https://github.com/hwouu))
 
 - **Backend & Cloud**
-  - 김강연
-  - 표형민
+  - 김강연 ([@kangyeon9525](https://github.com/kangyeon9525))
+  - 표형민 ([@pyohm](https://github.com/pyohm))
 
 - **Hardware & IoT**
-  - 송준수
+  - 송준수 ([@songsare1225](https://github.com/songsare1225))
 
 ## 라이선스
 
