@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@/components/ui/card';
+import { Card } from '../../components/ui/card';
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react';
 import { StatsSummary } from '../../types/stats';
 import { LoadingSpinner } from '../common/Loading';
@@ -14,20 +14,24 @@ export const StatsCard = ({ summary, loading = false }: StatsCardProps) => {
     if (!summary.trend || summary.trend === 'neutral') return null;
     
     const commonClasses = "w-5 h-5 ml-1";
+    const colorClass = summary.trend === 'up' ? 'text-success dark:text-green-400' : 'text-danger dark:text-red-400';
+    
     return summary.trend === 'up' ? (
-      <ArrowUpIcon className={`${commonClasses} text-success`} />
+      <ArrowUpIcon className={`${commonClasses} ${colorClass}`} />
     ) : (
-      <ArrowDownIcon className={`${commonClasses} text-danger`} />
+      <ArrowDownIcon className={`${commonClasses} ${colorClass}`} />
     );
   };
 
   const getTrendColor = () => {
     if (!summary.trend || summary.trend === 'neutral') return 'text-gray-500 dark:text-gray-400';
-    return summary.trend === 'up' ? 'text-success' : 'text-danger';
+    return summary.trend === 'up' 
+      ? 'text-success dark:text-green-400' 
+      : 'text-danger dark:text-red-400';
   };
 
   return (
-    <Card className="p-6 bg-white dark:bg-dark-card">
+    <Card className="p-6 bg-white dark:bg-dark-card border dark:border-gray-700">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -55,7 +59,7 @@ export const StatsCard = ({ summary, loading = false }: StatsCardProps) => {
           </div>
         </div>
         {summary.icon && (
-          <div className="p-3 rounded-full bg-primary/10 dark:bg-primary/20">
+          <div className="p-3 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-400">
             {summary.icon}
           </div>
         )}
