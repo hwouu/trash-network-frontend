@@ -1,5 +1,6 @@
-// src/App.tsx
-import React from 'react';
+
+// src/App.tsx 업데이트
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { Dashboard } from './pages/Dashboard';
@@ -8,8 +9,16 @@ import { Settings } from './pages/Settings';
 import { BinManagement } from './pages/admin/BinManagement';
 import { Schedule } from './pages/admin/Schedule';
 import { NotFound } from './pages/NotFound';
+import { useThemeStore } from './store/useThemeStore';
+import { applyTheme } from './utils/theme';
 
 function App() {
+  const isDarkMode = useThemeStore((state) => state.isDarkMode);
+
+  useEffect(() => {
+    applyTheme(isDarkMode);
+  }, [isDarkMode]);
+
   return (
     <Router>
       <DashboardLayout>
