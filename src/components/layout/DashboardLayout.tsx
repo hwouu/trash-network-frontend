@@ -1,4 +1,3 @@
-// src/components/layout/DashboardLayout.tsx
 import React from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
@@ -9,12 +8,14 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-background">
       <Header />
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-8">
-          <div className="max-w-7xl mx-auto">{children}</div>
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
         </main>
       </div>
     </div>
