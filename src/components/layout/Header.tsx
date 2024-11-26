@@ -8,7 +8,7 @@ export const Header = () => {
   const { isDarkMode, toggleTheme } = useThemeStore();
 
   return (
-    <header className="bg-white dark:bg-dark-secondary shadow-md">
+    <header className="bg-gray-50 dark:bg-dark-secondary shadow-md border-b border-gray-200 dark:border-gray-700">
       <div className="w-full px-6"> {/* max-w-7xl과 큰 마진/패딩 제거 */}
         <div className="flex justify-between h-16">
           <div className="flex items-center">

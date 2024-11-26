@@ -1,23 +1,24 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Battery, Clock, MapPin, Flame } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
-import { TrashBin } from '../../types/trash';
-import { 
-  CAPACITY_THRESHOLDS, 
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Battery, Clock, MapPin, Flame } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
+import { TrashBin } from "../../types/trash";
+import {
+  CAPACITY_THRESHOLDS,
   STATUS_COLORS,
   CAPACITY_COLORS,
-  ALERT_COLORS 
-} from '../../utils/constants';
+  ALERT_COLORS,
+} from "../../utils/constants";
 
 interface TrashBinCardProps {
   bin: TrashBin;
+  onClick?: () => void; // onClick prop 추가
 }
 
-export const TrashBinCard = ({ bin }: TrashBinCardProps) => {
+export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
   const getStatusColor = () => {
     if (bin.flameDetected) return ALERT_COLORS.fire;
-    if (bin.status === 'full') return CAPACITY_COLORS.full;
+    if (bin.status === "full") return CAPACITY_COLORS.full;
     return STATUS_COLORS[bin.status] || STATUS_COLORS.normal;
   };
 
@@ -28,9 +29,12 @@ export const TrashBinCard = ({ bin }: TrashBinCardProps) => {
   };
 
   return (
-    <Card className="w-full max-w-sm bg-white dark:bg-dark-card border dark:border-gray-700 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <Card
+      className="w-full max-w-sm bg-white dark:bg-dark-card border dark:border-gray-700 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      onClick={onClick}
+    >
       <div className={`h-2 ${getStatusColor()}`} />
-      
+
       <div className="p-6">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
@@ -44,14 +48,20 @@ export const TrashBinCard = ({ bin }: TrashBinCardProps) => {
             </div>
           </div>
           <div className="flex items-center">
-            <Battery className={`w-5 h-5 ${
-              bin.batteryLevel < 20 ? 'text-red-500' : 'text-gray-400 dark:text-gray-500'
-            } mr-1`} />
-            <span className={`text-sm ${
-              bin.batteryLevel < 20 
-                ? 'text-red-500' 
-                : 'text-gray-600 dark:text-gray-400'
-            }`}>
+            <Battery
+              className={`w-5 h-5 ${
+                bin.batteryLevel < 20
+                  ? "text-red-500"
+                  : "text-gray-400 dark:text-gray-500"
+              } mr-1`}
+            />
+            <span
+              className={`text-sm ${
+                bin.batteryLevel < 20
+                  ? "text-red-500"
+                  : "text-gray-600 dark:text-gray-400"
+              }`}
+            >
               {bin.batteryLevel}%
             </span>
           </div>
@@ -69,7 +79,9 @@ export const TrashBinCard = ({ bin }: TrashBinCardProps) => {
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
             <div
-              className={`h-2.5 rounded-full ${getCapacityColor(bin.capacity)} transition-all duration-300`}
+              className={`h-2.5 rounded-full ${getCapacityColor(
+                bin.capacity
+              )} transition-all duration-300`}
               style={{ width: `${bin.capacity}%` }}
             />
           </div>
@@ -78,26 +90,40 @@ export const TrashBinCard = ({ bin }: TrashBinCardProps) => {
         {/* Status and Time */}
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center text-gray-600 dark:text-gray-400">
-            <Flame className={`w-4 h-4 mr-1 ${bin.flameDetected ? 'text-red-500' : 'text-gray-400 dark:text-gray-500'}`} />
-            <span className={`text-sm ${bin.flameDetected ? 'text-red-500 dark:text-red-400 font-medium' : ''}`}>
-              {bin.flameDetected ? 'Fire Detected!' : 'No Fire'}
+            <Flame
+              className={`w-4 h-4 mr-1 ${
+                bin.flameDetected
+                  ? "text-red-500"
+                  : "text-gray-400 dark:text-gray-500"
+              }`}
+            />
+            <span
+              className={`text-sm ${
+                bin.flameDetected
+                  ? "text-red-500 dark:text-red-400 font-medium"
+                  : ""
+              }`}
+            >
+              {bin.flameDetected ? "Fire Detected!" : "No Fire"}
             </span>
           </div>
           <div className="flex items-center text-gray-600 dark:text-gray-400">
             <Clock className="w-4 h-4 mr-1" />
-            <span className="text-sm">{formatDistanceToNow(new Date(bin.lastUpdated))} ago</span>
+            <span className="text-sm">
+              {formatDistanceToNow(new Date(bin.lastUpdated))} ago
+            </span>
           </div>
         </div>
 
         {/* Warning Messages */}
-        {bin.status === 'warning' && (
+        {bin.status === "warning" && (
           <div className="mt-4 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/50 rounded-md">
             <p className="text-sm text-yellow-700 dark:text-yellow-400">
               Attention needed: Approaching capacity limit
             </p>
           </div>
         )}
-        {bin.status === 'full' && (
+        {bin.status === "full" && (
           <div className="mt-4 p-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-900/50 rounded-md">
             <p className="text-sm text-orange-700 dark:text-orange-400">
               Action required: Bin is full
