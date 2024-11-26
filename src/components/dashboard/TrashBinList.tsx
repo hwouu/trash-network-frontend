@@ -1,35 +1,44 @@
-import React, { useState, useMemo } from 'react';
-import { TrashBinCard } from './TrashBinCard';
-import { Search, SortAsc, Filter } from 'lucide-react';
-import type { TrashBin } from '../../types/trash';
+import React, { useState, useMemo } from "react";
+import { TrashBinCard } from "./TrashBinCard";
+import { Search, SortAsc, Filter } from "lucide-react";
+import type { TrashBin } from "../../types/trash";
+import { TrashBinModal } from "./TrashBinModal";
 
 interface TrashBinListProps {
   bins: TrashBin[];
 }
 
-type SortOption = 'capacity' | 'location' | 'lastUpdated';
+type SortOption = "deviceId" | "capacity" | "location" | "lastUpdated"; // deviceId 추가
 
 export const TrashBinList = ({ bins }: TrashBinListProps) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState<SortOption>('capacity');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<SortOption>("deviceId"); // 기본값을 deviceId로 변경
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [selectedBin, setSelectedBin] = useState<TrashBin | null>(null);
 
   const filteredAndSortedBins = useMemo(() => {
     return bins
-      .filter(bin => {
-        const matchesSearch = bin.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            bin.deviceId.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesStatus = statusFilter === 'all' || bin.status === statusFilter;
+      .filter((bin) => {
+        const matchesSearch =
+          bin.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          bin.deviceId.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesStatus =
+          statusFilter === "all" || bin.status === statusFilter;
         return matchesSearch && matchesStatus;
       })
       .sort((a, b) => {
         switch (sortBy) {
-          case 'capacity':
+          case "deviceId":
+            return a.deviceId.localeCompare(b.deviceId);
+          case "capacity":
             return b.capacity - a.capacity;
-          case 'location':
+          case "location":
             return a.location.localeCompare(b.location);
-          case 'lastUpdated':
-            return new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime();
+          case "lastUpdated":
+            return (
+              new Date(b.lastUpdated).getTime() -
+              new Date(a.lastUpdated).getTime()
+            );
           default:
             return 0;
         }
@@ -63,6 +72,7 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
                 className="appearance-none bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
+                <option value="deviceId">Device ID</option>
                 <option value="capacity">Capacity</option>
                 <option value="location">Location</option>
                 <option value="lastUpdated">Last Updated</option>
@@ -94,14 +104,25 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredAndSortedBins.length > 0 ? (
           filteredAndSortedBins.map((bin) => (
-            <TrashBinCard key={bin.deviceId} bin={bin} />
+            <TrashBinCard
+              key={bin.deviceId}
+              bin={bin}
+              onClick={() => setSelectedBin(bin)}
+            />
           ))
         ) : (
-          <div className="col-span-full text-center py-8 bg-white dark:bg-dark-card rounded-lg border dark:border-gray-700">
-            <p className="text-gray-500 dark:text-gray-400">No trash bins found matching your criteria.</p>
+          <div className="col-span-full text-center py-8 bg-white rounded-lg">
+            <p className="text-gray-500">
+              No trash bins found matching your criteria.
+            </p>
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {selectedBin && (
+        <TrashBinModal bin={selectedBin} onClose={() => setSelectedBin(null)} />
+      )}
     </div>
   );
 };

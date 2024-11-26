@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="w-64 bg-white dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 flex-shrink-0">
+    <div className="w-64 bg-gray-50 dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 flex-shrink-0">
       <div className="p-4 h-full">
         <div className="space-y-4">
           <Link
