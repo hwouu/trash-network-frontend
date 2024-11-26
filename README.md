@@ -6,6 +6,11 @@
 
 ESP32와 AWS IoT를 활용하여 캠퍼스 내 쓰레기통의 상태를 실시간으로 모니터링하고 관리하는 시스템입니다. 각 쓰레기통의 용량과 화재 감지 상태를 실시간으로 확인할 수 있으며, 데이터 분석을 통한 효율적인 수거 일정 관리를 지원합니다.
 
+## 관련 저장소
+
+- [Backend Repository](https://github.com/hwouu/trash-network-backend)
+- [Hardware Repository](https://github.com/hwouu/trash-network-hardware)
+
 ### 주요 기능
 
 - **실시간 모니터링**
@@ -110,7 +115,3 @@ src/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 관련 저장소
-
-- [Backend Repository](https://github.com/hwouu/trash-network-backend)
-- [Hardware Repository](https://github.com/hwouu/trash-network-hardware)
