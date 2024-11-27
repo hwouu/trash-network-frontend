@@ -8,11 +8,11 @@ interface TrashBinListProps {
   bins: TrashBin[];
 }
 
-type SortOption = "deviceId" | "capacity" | "location" | "lastUpdated"; // deviceId 추가
+type SortOption = "deviceId" | "capacity" | "location" | "lastUpdated";
 
 export const TrashBinList = ({ bins }: TrashBinListProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState<SortOption>("deviceId"); // 기본값을 deviceId로 변경
+  const [sortBy, setSortBy] = useState<SortOption>("deviceId");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedBin, setSelectedBin] = useState<TrashBin | null>(null);
 
@@ -48,14 +48,10 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
   return (
     <div className="space-y-6">
       {/* Controls Section */}
-      <div className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-dark-card p-4 rounded-lg shadow-sm border dark:border-gray-700">
+      <div className="flex flex-wrap sm:flex-nowrap gap-4 items-center justify-between bg-white dark:bg-dark-card p-4 rounded-lg shadow-sm border dark:border-gray-700">
         {/* Search */}
-        <div className="w-full sm:max-w-md relative">
-          {" "}
-          {/* relative 추가 */}
+        <div className="w-full sm:max-w-md relative flex-grow">
           <div className="relative">
-            {" "}
-            {/* 검색 아이콘을 위한 컨테이너 */}
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 pointer-events-none" />
             <input
               type="text"
@@ -66,8 +62,9 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
             />
           </div>
         </div>
+
         {/* Filters */}
-        <div className="flex flex-wrap gap-4">
+        <div className="w-full sm:w-auto flex flex-wrap sm:flex-nowrap gap-4 justify-start sm:justify-end">
           {/* Sort Dropdown */}
           <div className="relative">
             <div className="flex items-center">
