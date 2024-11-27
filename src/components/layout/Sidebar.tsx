@@ -1,14 +1,30 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { X } from 'lucide-react';
 
-export const Sidebar = () => {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export const Sidebar = ({ onClose }: SidebarProps) => {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="w-64 bg-gray-50 dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 flex-shrink-0">
-      <div className="p-4 h-full">
+    <div className="w-64 bg-gray-50 dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 flex-shrink-0 h-full">
+      {/* Mobile Close Button */}
+      <div className="flex justify-end p-2 lg:hidden">
+        <button
+          onClick={onClose}
+          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+          aria-label="Close menu"
+        >
+          <X className="h-6 w-6 text-gray-500 dark:text-gray-400" />
+        </button>
+      </div>
+
+      <div className="p-4">
         <div className="space-y-4">
           <Link
             to="/"
