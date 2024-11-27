@@ -48,21 +48,26 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
   return (
     <div className="space-y-6">
       {/* Controls Section */}
-      <div className="flex flex-wrap gap-4 items-center justify-between bg-white dark:bg-dark-card p-4 rounded-lg shadow-sm border dark:border-gray-700">
+      <div className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-dark-card p-4 rounded-lg shadow-sm border dark:border-gray-700">
         {/* Search */}
-        <div className="relative flex-grow max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-          <input
-            type="text"
-            placeholder="Search by location or ID..."
-            className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-dark-card text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="w-full sm:max-w-md relative">
+          {" "}
+          {/* relative 추가 */}
+          <div className="relative">
+            {" "}
+            {/* 검색 아이콘을 위한 컨테이너 */}
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Search by location or ID..."
+              className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-dark-card text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
-
         {/* Filters */}
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           {/* Sort Dropdown */}
           <div className="relative">
             <div className="flex items-center">
@@ -101,7 +106,7 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
       </div>
 
       {/* Grid of Trash Bin Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredAndSortedBins.length > 0 ? (
           filteredAndSortedBins.map((bin) => (
             <TrashBinCard
