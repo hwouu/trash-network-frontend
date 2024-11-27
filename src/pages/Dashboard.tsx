@@ -45,7 +45,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            Total Bins
+            전체 쓰레기통
           </div>
           <div className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
             {bins.length}
@@ -53,21 +53,21 @@ export const Dashboard = () => {
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            Warning
+            경고
           </div>
           <div className="text-2xl font-semibold text-yellow-500 mt-1">
             {bins.filter((bin) => bin.status === "warning").length}
           </div>
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Full</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">가득 참</div>
           <div className="text-2xl font-semibold text-orange-500 mt-1">
             {bins.filter((bin) => bin.status === "full").length}
           </div>
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            Average Capacity
+            평균 사용량
           </div>
           <div className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
             {Math.round(

@@ -55,7 +55,7 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search by location or ID..."
+              placeholder="장소 또는 디바이스 ID로 검색"
               className="pl-10 pr-4 py-2 w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-dark-card text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -74,10 +74,10 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
                 className="appearance-none bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                <option value="deviceId">Device ID</option>
-                <option value="capacity">Capacity</option>
-                <option value="location">Location</option>
-                <option value="lastUpdated">Last Updated</option>
+                <option value="deviceId">디바이스 ID</option>
+                <option value="capacity">용량</option>
+                <option value="location">위치</option>
+                <option value="lastUpdated">마지막 업데이트</option>
               </select>
             </div>
           </div>
@@ -91,11 +91,11 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="appearance-none bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                <option value="all">All Status</option>
-                <option value="normal">Normal</option>
-                <option value="warning">Warning</option>
-                <option value="full">Full</option>
-                <option value="error">Error</option>
+                <option value="all">모든 상태</option>
+                <option value="normal">보통</option>
+                <option value="warning">경고</option>
+                <option value="full">가득 참</option>
+                <option value="error">에러</option>
               </select>
             </div>
           </div>

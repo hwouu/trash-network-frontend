@@ -40,7 +40,7 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Bin #{bin.deviceId}
+              {bin.deviceId}
             </h3>
             <div className="flex items-center text-gray-500 dark:text-gray-400 mt-1">
               <MapPin className="w-4 h-4 mr-1" />
@@ -71,7 +71,7 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
         <div className="mb-4">
           <div className="flex justify-between mb-1">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Capacity
+              사용 용량
             </span>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {bin.capacity}%
@@ -104,7 +104,7 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
                   : ""
               }`}
             >
-              {bin.flameDetected ? "Fire Detected!" : "No Fire"}
+              {bin.flameDetected ? "화재 감지됨!" : "정상"}
             </span>
           </div>
           <div className="flex items-center text-gray-600 dark:text-gray-400">
@@ -119,21 +119,21 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
         {bin.status === "warning" && (
           <div className="mt-4 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/50 rounded-md">
             <p className="text-sm text-yellow-700 dark:text-yellow-400">
-              Attention needed: Approaching capacity limit
+              주의 필요: 용량 한계에 도달하고 있습니다
             </p>
           </div>
         )}
         {bin.status === "full" && (
           <div className="mt-4 p-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-900/50 rounded-md">
             <p className="text-sm text-orange-700 dark:text-orange-400">
-              Action required: Bin is full
+              수거 필요: 쓰레기통이 가득 찼습니다
             </p>
           </div>
         )}
         {bin.flameDetected && (
           <div className="mt-4 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 rounded-md">
             <p className="text-sm text-red-700 dark:text-red-400 font-bold">
-              EMERGENCY: Fire detected!
+              긴급: 화재가 감지되었습니다
             </p>
           </div>
         )}
