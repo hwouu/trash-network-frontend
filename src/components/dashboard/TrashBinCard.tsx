@@ -119,21 +119,21 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
         {bin.status === "warning" && (
           <div className="mt-4 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/50 rounded-md">
             <p className="text-sm text-yellow-700 dark:text-yellow-400">
-              주의 필요: 용량 한계에 도달하고 있습니다
+              ⚠️ 주의 필요: 용량 한계에 도달하고 있습니다
             </p>
           </div>
         )}
         {bin.status === "full" && (
           <div className="mt-4 p-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-900/50 rounded-md">
             <p className="text-sm text-orange-700 dark:text-orange-400">
-              수거 필요: 쓰레기통이 가득 찼습니다
+              🗑️ 수거 필요: 쓰레기통이 가득 찼습니다
             </p>
           </div>
         )}
         {bin.flameDetected && (
           <div className="mt-4 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 rounded-md">
             <p className="text-sm text-red-700 dark:text-red-400 font-bold">
-              긴급: 화재가 감지되었습니다
+              🚨 긴급: 화재가 감지되었습니다
             </p>
           </div>
         )}
