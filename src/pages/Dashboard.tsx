@@ -1,31 +1,38 @@
 // src/pages/Dashboard.tsx
-import React from 'react';
-import { TrashBinList } from '../components/dashboard/TrashBinList';
-import { useTrashBinData } from '../hooks/useTrashBinData';
-import { Alert } from '../components/common/Alert';
-import { LoadingSpinner } from '../components/common/Loading';
+import React from "react";
+import { TrashBinList } from "../components/dashboard/TrashBinList";
+import { useTrashBinData } from "../hooks/useTrashBinData";
+import { Alert } from "../components/common/Alert";
+import { LoadingSpinner } from "../components/common/Loading";
+import { RotateCw } from "lucide-react"; // 아이콘 import 추가
 
 export const Dashboard = () => {
   const { bins, loading, error, lastUpdated, refetch } = useTrashBinData();
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="flex justify-between items-center">
+      {/* Header Section */}
+      <div className="space-y-4 sm:space-y-0">
+        {/* Title and Description */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
               Dashboard
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              실시간으로 캠퍼스 내 쓰레기통의 상태를 모니터링하고 관리할 수 있습니다.
+              실시간으로 캠퍼스 내 쓰레기통의 상태를 모니터링하고 관리할 수
+              있습니다.
             </p>
           </div>
-          <div className="flex items-center gap-4">
+
+          {/* Refresh Button and Last Updated */}
+          <div className="flex items-center gap-3 mt-4 sm:mt-0">
             <button
               onClick={refetch}
-              className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-md transition-colors"
+              className="p-2 text-white bg-primary hover:bg-primary/90 rounded-full transition-colors"
+              aria-label="새로고침"
             >
-              새로고침
+              <RotateCw className="h-5 w-5" />
             </button>
             <div className="text-sm text-gray-500 dark:text-gray-400">
               Last updated: {lastUpdated.toLocaleTimeString()}
@@ -35,27 +42,39 @@ export const Dashboard = () => {
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Total Bins</div>
-          <div className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">{bins.length}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Total Bins
+          </div>
+          <div className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
+            {bins.length}
+          </div>
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Warning</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Warning
+          </div>
           <div className="text-2xl font-semibold text-yellow-500 mt-1">
-            {bins.filter(bin => bin.status === 'warning').length}
+            {bins.filter((bin) => bin.status === "warning").length}
           </div>
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
           <div className="text-sm text-gray-500 dark:text-gray-400">Full</div>
           <div className="text-2xl font-semibold text-orange-500 mt-1">
-            {bins.filter(bin => bin.status === 'full').length}
+            {bins.filter((bin) => bin.status === "full").length}
           </div>
         </div>
         <div className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm border dark:border-gray-700">
-          <div className="text-sm text-gray-500 dark:text-gray-400">Average Capacity</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Average Capacity
+          </div>
           <div className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">
-            {Math.round(bins.reduce((acc, bin) => acc + bin.capacity, 0) / bins.length || 0)}%
+            {Math.round(
+              bins.reduce((acc, bin) => acc + bin.capacity, 0) / bins.length ||
+                0
+            )}
+            %
           </div>
         </div>
       </div>
