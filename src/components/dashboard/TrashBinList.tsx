@@ -115,7 +115,7 @@ export const TrashBinList = ({ bins }: TrashBinListProps) => {
         ) : (
           <div className="col-span-full text-center py-8 bg-white rounded-lg">
             <p className="text-gray-500">
-              No trash bins found matching your criteria.
+              조건과 일치하는 쓰레기통을 찾을 수 없습니다
             </p>
           </div>
         )}

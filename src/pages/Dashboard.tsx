@@ -35,7 +35,7 @@ export const Dashboard = () => {
               <RotateCw className="h-5 w-5" />
             </button>
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              Last updated: {lastUpdated.toLocaleTimeString()}
+              최근 업데이트: {lastUpdated.toLocaleTimeString()}
             </div>
           </div>
         </div>
