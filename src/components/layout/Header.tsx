@@ -24,7 +24,7 @@ export const Header = ({ onMenuClick }: HeaderProps) => {
               <Menu className="h-6 w-6 text-gray-500 dark:text-gray-400" />
             </button>
             <Logo />
-            <Link to="/" className="ml-2 text-xl font-bold text-primary dark:text-dark-text-primary hidden sm:block">
+            <Link to="/" className="ml-2 text-base sm:text-xl font-bold text-primary dark:text-dark-text-primary">
               Trash Network
             </Link>
           </div>
