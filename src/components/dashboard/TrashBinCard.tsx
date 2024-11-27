@@ -35,9 +35,9 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
     >
       <div className={`h-2 ${getStatusColor()}`} />
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">  {/* 패딩 조정 */}
         {/* Header */}
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Bin #{bin.deviceId}
