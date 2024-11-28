@@ -101,7 +101,7 @@ const Statistics = () => {
                 통계
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                쓰레기통 사용량과 이벤트 통계를 확인할 수 있습니다.
+                누적 쓰레기통 사용량과 경고, 이벤트 통계를 확인할 수 있습니다.
               </p>
             </div>
           </div>
