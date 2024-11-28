@@ -1,33 +1,26 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../../utils/constants';
-import { StatsData } from '../../types/stats';
+import { TimeSeriesStats } from '../../types/stats';
 
 export const statsApi = {
-  // 전체 통계 데이터 조회
-  getSummary: async (): Promise<StatsData> => {
-    const response = await axios.get(`${API_BASE_URL}/stats/summary`);
-    return response.data;
-  },
-
-  // 시계열 데이터 조회
-  getTimeSeriesData: async (start: string, end: string): Promise<StatsData['timeSeriesData']> => {
-    const response = await axios.get(`${API_BASE_URL}/stats/time-series`, {
-      params: { start, end }
-    });
-    return response.data;
-  },
-
-  // 위치별 통계 조회
-  getLocationStats: async (): Promise<StatsData['capacityByLocation']> => {
-    const response = await axios.get(`${API_BASE_URL}/stats/location`);
-    return response.data;
-  },
-
-  // 일별 통계 조회
-  getDailyStats: async (date: string): Promise<any> => {
-    const response = await axios.get(`${API_BASE_URL}/stats/daily`, {
-      params: { date }
-    });
-    return response.data;
+  getTimeSeriesStats: async (): Promise<TimeSeriesStats> => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/stats/timeseries`);
+      console.log('Time Series Stats Response:', response.data);
+      
+      const data = response.data;
+      return {
+        hourlyAvg: data.hourlyAvg || [],
+        dailyAvg: data.dailyAvg || [],
+        peakHours: data.peakHours || []
+      };
+    } catch (error) {
+      console.error('Error fetching time series stats:', error);
+      return {
+        hourlyAvg: [],
+        dailyAvg: [],
+        peakHours: []
+      };
+    }
   }
 };
