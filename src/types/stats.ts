@@ -33,6 +33,9 @@ export interface DeviceSummary {
 
 // API 응답 타입
 export interface StatisticsResponse {
+  summary?: {
+    [deviceId: string]: DeviceSummary;
+  };
   hourly_stats?: {
     [deviceId: string]: HourlyStats[];
   };
@@ -42,12 +45,9 @@ export interface StatisticsResponse {
   events?: {
     [deviceId: string]: EventData[];
   };
-  summary?: {
-    [deviceId: string]: DeviceSummary;
-  };
 }
 
-// 기존 타입들은 유지
+// 통계 요약 타입
 export interface StatsSummary {
   title: string;
   value: string | number;
@@ -64,7 +64,7 @@ export interface StatsCardProps {
 // 통계 데이터 필터 옵션
 export interface StatsFilter {
   deviceId?: string;
-  type: 'hourly' | 'location' | 'events' | 'summary';
+  type: 'hourly' | 'location' | 'events' | 'summary' | 'all';
   startDate?: string;
   endDate?: string;
 }

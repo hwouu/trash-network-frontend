@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { StatsCard } from "../components/dashboard/StatsCard";
 import { TimeSeriesChart } from "../components/dashboard/TimeSeriesChart";
 import { LocationChart } from "../components/dashboard/LocationChart";
 import { EventTimeline } from "../components/dashboard/EventTimeline";
 import { statsApi } from "../services/api/stats";
 import { Trash2, Percent, AlertTriangle, Flame } from "lucide-react";
-import { StatisticsResponse, StatsSummary } from '../types/stats';
-import { Card } from '../components/ui/card';
+import { StatisticsResponse, StatsSummary } from "../types/stats";
+import { Card } from "../components/ui/card";
 
 const Statistics = () => {
   const [loading, setLoading] = useState(true);
@@ -18,27 +18,35 @@ const Statistics = () => {
     if (!stats.summary) return [];
 
     const totalAlerts = Object.values(stats.summary).reduce(
-      (sum, device) => sum + device.total_alerts, 0
+      (sum, device) => sum + device.total_alerts,
+      0
     );
 
     const totalFlames = Object.values(stats.summary).reduce(
-      (sum, device) => sum + device.total_flame_detections, 0
+      (sum, device) => sum + device.total_flame_detections,
+      0
     );
 
-    const avgCapacity = Object.values(stats.summary).reduce(
-      (sum, device) => sum + device.avg_capacity, 0
-    ) / Object.keys(stats.summary).length;
+    const avgCapacity =
+      Object.values(stats.summary).reduce(
+        (sum, device) => sum + device.avg_capacity,
+        0
+      ) / Object.keys(stats.summary).length;
 
     return [
       {
         title: "평균 용량",
         value: `${avgCapacity.toFixed(1)}%`,
-        icon: <Percent className="w-6 h-6 text-primary dark:text-primary-400" />,
+        icon: (
+          <Percent className="w-6 h-6 text-primary dark:text-primary-400" />
+        ),
       },
       {
         title: "용량 경고",
         value: totalAlerts,
-        icon: <AlertTriangle className="w-6 h-6 text-primary dark:text-primary-400" />,
+        icon: (
+          <AlertTriangle className="w-6 h-6 text-primary dark:text-primary-400" />
+        ),
       },
       {
         title: "화재 감지",
@@ -58,17 +66,17 @@ const Statistics = () => {
       try {
         setLoading(true);
         const dashboardStats = await statsApi.getDashboardStats();
+        console.log("Loaded dashboard stats:", dashboardStats); // 디버깅용
         setStats(dashboardStats);
       } catch (err) {
-        console.error('Failed to load statistics:', err);
-        setError('통계 데이터를 불러오는데 실패했습니다.');
+        console.error("Failed to load statistics:", err);
+        setError("통계 데이터를 불러오는데 실패했습니다.");
       } finally {
         setLoading(false);
       }
     };
 
     loadStats();
-    // 5분마다 데이터 갱신
     const interval = setInterval(loadStats, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -109,19 +117,13 @@ const Statistics = () => {
 
       {/* 차트 섹션 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {stats.hourly_stats && (
-          <TimeSeriesChart data={stats.hourly_stats} />
-        )}
-        {stats.location_stats && (
-          <LocationChart data={stats.location_stats} />
-        )}
+        <TimeSeriesChart data={stats.hourly_stats || {}} />
+        <LocationChart data={stats.location_stats || {}} />
       </div>
 
       {/* 이벤트 타임라인 섹션 */}
       <div className="grid grid-cols-1 gap-6">
-        {stats.events && (
-          <EventTimeline events={stats.events} />
-        )}
+        <EventTimeline events={stats.events || {}} />
       </div>
 
       {loading && (
