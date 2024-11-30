@@ -82,7 +82,7 @@ const Statistics = () => {
 
   if (error) {
     return (
-      <Card className="p-6">
+      <Card className="p-6 bg-white dark:bg-gray-800/50 border dark:border-gray-700">
         <div className="text-center text-red-500 dark:text-red-400">
           {error}
         </div>
@@ -121,7 +121,7 @@ const Statistics = () => {
       </div>
 
       {loading && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
         </div>
       )}

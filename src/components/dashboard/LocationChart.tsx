@@ -71,8 +71,9 @@ export const LocationChart = ({ data }: LocationChartProps) => {
             />
             <XAxis
               dataKey="location"
-              stroke="rgba(100, 116, 139, 0.7)"
+              stroke="currentColor"
               tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor" }}
               interval={0}
               angle={-45}
               textAnchor="end"
@@ -80,28 +81,22 @@ export const LocationChart = ({ data }: LocationChartProps) => {
             />
             <YAxis
               yAxisId="left"
-              stroke="rgba(100, 116, 139, 0.7)"
+              stroke="currentColor"
               tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor" }}
               unit="%"
             />
             <YAxis
               yAxisId="right"
               orientation="right"
-              stroke="rgba(100, 116, 139, 0.7)"
+              stroke="currentColor"
               tick={{ fill: "currentColor" }}
-            />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "rgba(17, 24, 39, 0.8)",
-                border: "1px solid rgba(100, 116, 139, 0.2)",
-                borderRadius: "6px",
-                color: "#fff",
-              }}
+              axisLine={{ stroke: "currentColor" }}
             />
             <Legend
               wrapperStyle={{
                 paddingTop: "1rem",
-                color: "rgba(100, 116, 139, 0.7)",
+                color: "currentColor",
               }}
             />
             <Bar

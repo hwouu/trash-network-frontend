@@ -38,8 +38,8 @@ export const EventTimeline = ({ events }: EventTimelineProps) => {
             <div
               className={`p-2 rounded-full ${
                 event.type === "flame"
-                  ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400"
-                  : "bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-400"
+                  ? "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400"
+                  : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400"
               }`}
             >
               {event.type === "flame" ? (

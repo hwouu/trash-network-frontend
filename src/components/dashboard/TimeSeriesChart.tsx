@@ -57,7 +57,8 @@ export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
         시간대별 용량 변화
       </h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        24시간 기준 각 시간대별 쓰레기통의 평균 용량을 보여줍니다.
+        24시간 기준 각 시간대별 쓰레기통의 평균 용량을 보여줍니다. 각 디바이스의
+        데이터가 개별적으로 표시됩니다.
       </p>
       <div className="h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -68,12 +69,14 @@ export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
             />
             <XAxis
               dataKey="hour"
-              stroke="rgba(100, 116, 139, 0.7)"
+              stroke="currentColor"
               tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor" }}
             />
             <YAxis
-              stroke="rgba(100, 116, 139, 0.7)"
+              stroke="currentColor"
               tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor" }}
               unit="%"
               domain={[0, 100]}
             />
@@ -88,7 +91,7 @@ export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
             <Legend
               wrapperStyle={{
                 paddingTop: "1rem",
-                color: "rgba(100, 116, 139, 0.7)",
+                color: "currentColor",
               }}
             />
             {Object.keys(data).map((deviceId) => (

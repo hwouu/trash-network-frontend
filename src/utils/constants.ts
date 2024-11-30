@@ -47,3 +47,31 @@ export const MOCK_TRASH_BINS = [
     status: "normal" as const
   }
 ];
+
+export const CHART_COLORS = {
+  grid: 'rgba(100, 116, 139, 0.2)',
+  text: 'currentColor',
+  tooltip: {
+    bg: 'rgba(17, 24, 39, 0.8)',
+    border: 'rgba(100, 116, 139, 0.2)',
+    text: '#fff'
+  },
+  axis: {
+    stroke: 'currentColor',
+    text: 'currentColor'
+  }
+};
+
+// 디바이스별 차트 색상
+export const DEVICE_COLORS = {
+  'ThrashModule1': '#22c55e', // green-500
+  'ThrashModule2': '#3b82f6', // blue-500
+  'ThrashModule3': '#f59e0b'  // amber-500
+};
+
+// 통계 차트 색상
+export const STATS_CHART_COLORS = {
+  capacity: '#3b82f6',    // blue-500
+  alerts: '#f59e0b',      // amber-500
+  flames: '#ef4444'       // red-500
+};
