@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../../utils/constants';
-import { StatisticsResponse } from '../../types/stats';
+import { StatisticsResponse, EventData } from '../../types/stats';
 
 export const statsApi = {
   getDashboardStats: async (): Promise<StatisticsResponse> => {
     try {
-      // 각 통계 타입별로 별도의 요청 수행
       const [summaryResponse, hourlyResponse, locationResponse, eventsResponse] = await Promise.all([
         axios.get(`${API_BASE_URL}/statistics?type=summary`),
         axios.get(`${API_BASE_URL}/statistics?type=hourly`),
@@ -13,7 +12,6 @@ export const statsApi = {
         axios.get(`${API_BASE_URL}/statistics?type=events`)
       ]);
 
-      // API 응답 로그
       console.log('API Responses:', {
         summary: summaryResponse.data,
         hourly: hourlyResponse.data,
@@ -21,7 +19,6 @@ export const statsApi = {
         events: eventsResponse.data
       });
 
-      // 응답 데이터 직접 사용 (이미 JSON 객체임)
       return {
         summary: summaryResponse.data.summary || {},
         hourly_stats: hourlyResponse.data.hourly_stats || {},
@@ -39,7 +36,6 @@ export const statsApi = {
     }
   },
 
-  // 특정 디바이스의 통계 조회
   getDeviceStats: async (deviceId: string): Promise<StatisticsResponse> => {
     try {
       const [summaryResponse, hourlyResponse, locationResponse, eventsResponse] = await Promise.all([
@@ -57,6 +53,24 @@ export const statsApi = {
       };
     } catch (error) {
       console.error(`Error fetching stats for device ${deviceId}:`, error);
+      throw error;
+    }
+  },
+
+  // Notifications 페이지용 이벤트 데이터 조회
+  getEventStats: async (): Promise<{ [deviceId: string]: EventData[] }> => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/statistics?type=events`);
+      
+      console.log('Events Response:', response.data);
+      
+      if (!response.data.events) {
+        console.warn('No events data in response:', response.data);
+      }
+
+      return response.data.events || {};
+    } catch (error) {
+      console.error('Error fetching events:', error);
       throw error;
     }
   }

@@ -10,6 +10,7 @@ import Schedule from './pages/admin/Schedule';
 import NotFound from './pages/NotFound';
 import { useThemeStore } from './store/useThemeStore';
 import { applyTheme } from './utils/theme';
+import Notifications from './pages/Notifications';
 
 // React Query 클라이언트 생성
 const queryClient = new QueryClient({
@@ -39,6 +40,7 @@ function App() {
             <Route path="/admin/bins" element={<BinManagement />} />
             <Route path="/admin/schedule" element={<Schedule />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Routes>
         </DashboardLayout>
       </Router>
