@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -7,10 +7,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from 'recharts';
-import { Card } from '../ui/card';
-import { HourlyStats } from '../../types/stats';
+  ResponsiveContainer,
+} from "recharts";
+import { Card } from "../ui/card";
+import { HourlyStats } from "../../types/stats";
 
 interface TimeSeriesChartProps {
   data: {
@@ -24,16 +24,19 @@ interface ProcessedDataPoint {
 }
 
 const DEVICE_COLORS = {
-  'ThrashModule1': '#22c55e',
-  'ThrashModule2': '#3b82f6',
-  'ThrashModule3': '#f59e0b'
+  ThrashModule1: "#22c55e",
+  ThrashModule2: "#3b82f6",
+  ThrashModule3: "#f59e0b",
 };
 
 export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
   const processedData = useMemo(() => {
-    const hourlyData: ProcessedDataPoint[] = Array.from({ length: 24 }, (_, i) => ({
-      hour: `${i}:00`,
-    }));
+    const hourlyData: ProcessedDataPoint[] = Array.from(
+      { length: 24 },
+      (_, i) => ({
+        hour: `${i}:00`,
+      })
+    );
 
     Object.entries(data).forEach(([deviceId, stats]) => {
       stats.forEach((stat) => {
@@ -50,39 +53,42 @@ export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
 
   return (
     <Card className="p-6">
-      <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
         시간대별 용량 변화
       </h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+        24시간 기준 각 시간대별 쓰레기통의 평균 용량을 보여줍니다.
+      </p>
       <div className="h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={processedData}>
-            <CartesianGrid 
-              strokeDasharray="3 3" 
+            <CartesianGrid
+              strokeDasharray="3 3"
               stroke="rgba(100, 116, 139, 0.2)"
             />
-            <XAxis 
-              dataKey="hour" 
+            <XAxis
+              dataKey="hour"
               stroke="rgba(100, 116, 139, 0.7)"
-              tick={{ fill: 'currentColor' }}
+              tick={{ fill: "currentColor" }}
             />
-            <YAxis 
+            <YAxis
               stroke="rgba(100, 116, 139, 0.7)"
-              tick={{ fill: 'currentColor' }}
-              unit="%" 
+              tick={{ fill: "currentColor" }}
+              unit="%"
               domain={[0, 100]}
             />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: 'rgba(17, 24, 39, 0.8)',
-                border: '1px solid rgba(100, 116, 139, 0.2)',
-                borderRadius: '6px',
-                color: '#fff'
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(17, 24, 39, 0.8)",
+                border: "1px solid rgba(100, 116, 139, 0.2)",
+                borderRadius: "6px",
+                color: "#fff",
               }}
             />
-            <Legend 
-              wrapperStyle={{ 
-                paddingTop: '1rem',
-                color: 'rgba(100, 116, 139, 0.7)' 
+            <Legend
+              wrapperStyle={{
+                paddingTop: "1rem",
+                color: "rgba(100, 116, 139, 0.7)",
               }}
             />
             {Object.keys(data).map((deviceId) => (
