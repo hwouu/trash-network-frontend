@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card } from '../../components/ui/card';
-import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react';
-import { StatsSummary } from '../../types/stats';
-import { LoadingSpinner } from '../common/Loading';
+import React from "react";
+import { Card } from "../../components/ui/card";
+import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
+import { StatsSummary } from "../../types/stats";
+import { LoadingSpinner } from "../common/Loading";
 
 interface StatsCardProps {
   summary: StatsSummary;
@@ -11,12 +11,15 @@ interface StatsCardProps {
 
 export const StatsCard = ({ summary, loading = false }: StatsCardProps) => {
   const getTrendIcon = () => {
-    if (!summary.trend || summary.trend === 'neutral') return null;
-    
+    if (!summary.trend || summary.trend === "neutral") return null;
+
     const commonClasses = "w-5 h-5 ml-1";
-    const colorClass = summary.trend === 'up' ? 'text-success dark:text-green-400' : 'text-danger dark:text-red-400';
-    
-    return summary.trend === 'up' ? (
+    const colorClass =
+      summary.trend === "up"
+        ? "text-success dark:text-green-400"
+        : "text-danger dark:text-red-400";
+
+    return summary.trend === "up" ? (
       <ArrowUpIcon className={`${commonClasses} ${colorClass}`} />
     ) : (
       <ArrowDownIcon className={`${commonClasses} ${colorClass}`} />
@@ -24,10 +27,11 @@ export const StatsCard = ({ summary, loading = false }: StatsCardProps) => {
   };
 
   const getTrendColor = () => {
-    if (!summary.trend || summary.trend === 'neutral') return 'text-gray-500 dark:text-gray-400';
-    return summary.trend === 'up' 
-      ? 'text-success dark:text-green-400' 
-      : 'text-danger dark:text-red-400';
+    if (!summary.trend || summary.trend === "neutral")
+      return "text-gray-500 dark:text-gray-400";
+    return summary.trend === "up"
+      ? "text-success dark:text-green-400"
+      : "text-danger dark:text-red-400";
   };
 
   return (
@@ -48,7 +52,7 @@ export const StatsCard = ({ summary, loading = false }: StatsCardProps) => {
                 {summary.change && (
                   <div className="flex items-center ml-3">
                     <span className={`text-sm font-medium ${getTrendColor()}`}>
-                      {summary.change > 0 ? '+' : ''}
+                      {summary.change > 0 ? "+" : ""}
                       {summary.change}%
                     </span>
                     {getTrendIcon()}

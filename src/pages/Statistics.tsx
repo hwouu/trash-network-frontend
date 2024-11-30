@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StatsCard } from "../components/dashboard/StatsCard";
 import { TimeSeriesChart } from "../components/dashboard/TimeSeriesChart";
 import { LocationChart } from "../components/dashboard/LocationChart";
-import { EventTimeline } from "../components/dashboard/EventTimeline";
 import { statsApi } from "../services/api/stats";
 import { Trash2, Percent, AlertTriangle, Flame } from "lucide-react";
 import { StatisticsResponse, StatsSummary } from "../types/stats";
@@ -101,7 +100,7 @@ const Statistics = () => {
                 통계
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                누적 쓰레기통 사용량과 경고, 이벤트 통계를 확인할 수 있습니다.
+                누적 쓰레기통 요약 정보와 데이터를 시각화하여 제공합니다.
               </p>
             </div>
           </div>
@@ -119,11 +118,6 @@ const Statistics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <TimeSeriesChart data={stats.hourly_stats || {}} />
         <LocationChart data={stats.location_stats || {}} />
-      </div>
-
-      {/* 이벤트 타임라인 섹션 */}
-      <div className="grid grid-cols-1 gap-6">
-        <EventTimeline events={stats.events || {}} />
       </div>
 
       {loading && (
