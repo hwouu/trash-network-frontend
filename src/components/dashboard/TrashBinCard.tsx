@@ -1,3 +1,4 @@
+// TrashBinCard.tsx
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Battery, Clock, MapPin, Flame } from "lucide-react";
@@ -12,8 +13,20 @@ import {
 
 interface TrashBinCardProps {
   bin: TrashBin;
-  onClick?: () => void; // onClick prop 추가
+  onClick?: () => void;
 }
+
+const parseUTCDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return new Date(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    date.getUTCHours(),
+    date.getUTCMinutes(),
+    date.getUTCSeconds()
+  );
+};
 
 export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
   const getStatusColor = () => {
@@ -35,7 +48,7 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
     >
       <div className={`h-2 ${getStatusColor()}`} />
 
-      <div className="p-4 sm:p-6">  {/* 패딩 조정 */}
+      <div className="p-4 sm:p-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
           <div>
@@ -110,7 +123,9 @@ export const TrashBinCard = ({ bin, onClick }: TrashBinCardProps) => {
           <div className="flex items-center text-gray-600 dark:text-gray-400">
             <Clock className="w-4 h-4 mr-1" />
             <span className="text-sm">
-              {formatDistanceToNow(new Date(bin.lastUpdated))} ago
+              {formatDistanceToNow(parseUTCDate(bin.lastUpdated), {
+                addSuffix: true
+              })}
             </span>
           </div>
         </div>
