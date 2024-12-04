@@ -27,16 +27,7 @@ export const Dashboard = () => {
 
           {/* Refresh Button and Last Updated */}
           <div className="flex items-center gap-3 mt-4 sm:mt-0">
-            <button
-              onClick={refetch}
-              className="p-2 text-white bg-primary hover:bg-primary/90 rounded-full transition-colors"
-              aria-label="새로고침"
-            >
-              <RotateCw className="h-5 w-5" />
-            </button>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              최근 업데이트: {lastUpdated.toLocaleTimeString()}
-            </div>
+
           </div>
         </div>
       </div>
