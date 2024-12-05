@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { EventTimeline } from "../components/dashboard/EventTimeline";
 import { statsApi } from "../services/api/stats";
 import { Card } from "../components/ui/card";
+import { subDays, startOfDay, endOfDay } from 'date-fns';
 
 const Notifications = () => {
   const [loading, setLoading] = useState(true);
@@ -12,7 +13,14 @@ const Notifications = () => {
     const loadEvents = async () => {
       try {
         setLoading(true);
-        const response = await statsApi.getEventStats();
+        // 기본적으로 최근 7일간의 이벤트 데이터를 가져옴
+        const endDate = endOfDay(new Date()).toISOString();
+        const startDate = startOfDay(subDays(new Date(), 7)).toISOString();
+
+        const response = await statsApi.getEventStats({ 
+          startDate,
+          endDate
+        });
         setEvents(response);
       } catch (err) {
         console.error("Failed to load events:", err);
@@ -23,7 +31,7 @@ const Notifications = () => {
     };
 
     loadEvents();
-    const interval = setInterval(loadEvents, 5 * 60 * 1000);
+    const interval = setInterval(loadEvents, 5 * 60 * 1000); // 5분마다 갱신
     return () => clearInterval(interval);
   }, []);
 
@@ -47,7 +55,7 @@ const Notifications = () => {
                 알림
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                쓰레기통의 화재 감지 및 용량 초과 이벤트를 확인할 수 있습니다.
+                최근 7일간의 쓰레기통 화재 감지 및 용량 초과 이벤트를 확인할 수 있습니다.
               </p>
             </div>
           </div>
