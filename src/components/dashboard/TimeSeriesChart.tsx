@@ -1,3 +1,4 @@
+// TimeSeriesChart.tsx
 import React, { useMemo } from "react";
 import {
   LineChart,
@@ -11,10 +12,15 @@ import {
 } from "recharts";
 import { Card } from "../ui/card";
 import { HourlyStats } from "../../types/stats";
+import { parseISO, format } from 'date-fns';
 
 interface TimeSeriesChartProps {
   data: {
     [deviceId: string]: HourlyStats[];
+  };
+  period?: {
+    start: string;
+    end: string;
   };
 }
 
@@ -29,12 +35,12 @@ const DEVICE_COLORS = {
   ThrashModule3: "#f59e0b",
 };
 
-export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
+export const TimeSeriesChart = ({ data, period }: TimeSeriesChartProps) => {
   const processedData = useMemo(() => {
     const hourlyData: ProcessedDataPoint[] = Array.from(
       { length: 24 },
       (_, i) => ({
-        hour: `${i}:00`,
+        hour: `${i.toString().padStart(2, '0')}:00`,
       })
     );
 
@@ -51,14 +57,25 @@ export const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => {
     return hourlyData;
   }, [data]);
 
+  const periodText = useMemo(() => {
+    if (!period?.start || !period?.end) return '';
+    const start = parseISO(period.start);
+    const end = parseISO(period.end);
+    return `${format(start, 'yyyy-MM-dd HH:mm')} ~ ${format(end, 'yyyy-MM-dd HH:mm')}`;
+  }, [period]);
+
   return (
     <Card className="p-6">
       <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
         시간대별 용량 변화
       </h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        24시간 기준 각 시간대별 쓰레기통의 평균 용량을 보여줍니다. 각 디바이스의
-        데이터가 개별적으로 표시됩니다.
+        최근 24시간 동안의 각 시간대별 쓰레기통 용량을 보여줍니다.
+        {periodText && (
+          <span className="block mt-1">
+            조회 기간: {periodText}
+          </span>
+        )}
       </p>
       <div className="h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
