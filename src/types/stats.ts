@@ -1,3 +1,5 @@
+// src/types/stats.ts
+
 // 시간별 통계 데이터 타입
 export interface HourlyStats {
   hour: number;
@@ -31,17 +33,35 @@ export interface DeviceSummary {
   last_location: string;
 }
 
+// 기간 정보 타입
+export interface PeriodInfo {
+  start: string;
+  end: string;
+}
+
+// 시간별 통계 응답 타입
+export interface HourlyStatsResponse {
+  data: {
+    [deviceId: string]: HourlyStats[];
+  };
+  period?: PeriodInfo;
+}
+
+// 위치별 통계 응답 타입
+export interface LocationStatsResponse {
+  data: {
+    [deviceId: string]: LocationStats[];
+  };
+  period?: PeriodInfo;
+}
+
 // API 응답 타입
 export interface StatisticsResponse {
   summary?: {
     [deviceId: string]: DeviceSummary;
   };
-  hourly_stats?: {
-    [deviceId: string]: HourlyStats[];
-  };
-  location_stats?: {
-    [deviceId: string]: LocationStats[];
-  };
+  hourly_stats?: HourlyStatsResponse;
+  location_stats?: LocationStatsResponse;
   events?: {
     [deviceId: string]: EventData[];
   };
